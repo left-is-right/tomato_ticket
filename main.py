@@ -134,10 +134,10 @@ def mainGUI():
     weightEntry.grid_remove()
     data_process_elements_list.append(weightEntry)
 
-    # 单价系数
+    # 预设单价
     price_coe_var = tk.StringVar()
     price_coe_var.set(str(1))  # 默认值为1
-    priceLabel = tk.Label(root_window, text="单价系数")
+    priceLabel = tk.Label(root_window, text="预设单价")
     priceLabel.grid(row=3, column=2)
     priceLabel.grid_remove()
     data_process_elements_list.append(priceLabel)
@@ -162,13 +162,13 @@ def mainGUI():
             return
 
         try:
-            price_coe = Decimal(price_coe_var.get())
+            price = Decimal(price_coe_var.get())
         except Exception:
-            messagebox.showinfo('提示', '单价系数必须为整数或小数！')
+            messagebox.showinfo('提示', '预设单价必须为整数或小数！')
             return
 
         output_file = output_path.get()
-        status = dataProcessServer(ori_data, output_file, weight_coe, price_coe)
+        status = dataProcessServer(ori_data, output_file, weight_coe, price)
         if status == 0:
             messagebox.showinfo('提示', '计算完成')
             # root_window.destroy()

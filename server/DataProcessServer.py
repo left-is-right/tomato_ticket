@@ -2,7 +2,7 @@ import pandas as pd
 from decimal import *
 
 
-def dataProcessServer(ori_data, output_file, weight_coe, price_coe):
+def dataProcessServer(ori_data, output_file, weight_coe, price):
 
     status = 0
     try:
@@ -22,10 +22,9 @@ def dataProcessServer(ori_data, output_file, weight_coe, price_coe):
     res_data = ori_data[mask]
 
     res_data['毛重'] = res_data['毛重'].apply(lambda x: Decimal(x))
-    res_data['单价'] = res_data['单价'].apply(lambda x: Decimal(x))
+    res_data['单价'] = price
     res_data['皮重'] = res_data['皮重'].apply(lambda x: Decimal(x))
     res_data['毛重'] = res_data['毛重'] * weight_coe
-    res_data['单价'] = res_data['单价'] * price_coe
     res_data['净重'] = res_data['毛重'] - res_data['皮重']
     res_data['金额'] = res_data['单价'] * res_data['净重']
 
@@ -41,7 +40,7 @@ def dataProcessServer(ori_data, output_file, weight_coe, price_coe):
     return status
 
 
-def dataProcessKfServer(ori_data, output_file, weight_coe, price_coe):
+def dataProcessKfServer(ori_data, output_file, weight_coe, price):
 
     status = 0
     try:
@@ -60,10 +59,9 @@ def dataProcessKfServer(ori_data, output_file, weight_coe, price_coe):
     res_data = ori_data[mask]
 
     res_data['毛重'] = res_data['毛重'].apply(lambda x: Decimal(x))
-    res_data['单价'] = res_data['单价'].apply(lambda x: Decimal(x))
+    res_data['单价'] = price
     res_data['皮重'] = res_data['皮重'].apply(lambda x: Decimal(x))
     res_data['毛重'] = res_data['毛重'] * weight_coe
-    res_data['单价'] = res_data['单价'] * price_coe
     res_data['净重'] = res_data['毛重'] - res_data['皮重']
     res_data['金额'] = res_data['单价'] * res_data['净重']
 
